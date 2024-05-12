@@ -1,0 +1,108 @@
+/* App.css */
+
+.App {
+  text-align: center;
+  
+}
+body {
+  background-color: #f5f0ff; /* Cor roxo claro */
+}
+
+.title {
+  font-family: sans-serif; /* Altere a fonte conforme desejado */
+  color: #380B61;
+  font-size: 24px;
+  margin-top: 150px; 
+}
+
+.petshop-form {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  padding-top: 10px;
+
+}
+
+/* Estilos para o formulário */
+.petshop-form form {
+  background-color: #ff0404;
+  font-family: sans-serif;
+  font-size: 1em;
+  color: #59429d;
+  margin-left: 36%;
+  margin-top: 2%;
+  justify-content: center;
+}
+
+.petshop-form label {
+  display: inline-block;
+  margin-bottom: 10em;
+  color: #380B61;
+  display: block;
+}
+
+.petshop-form input {
+  
+  padding: 0.2em;
+  border: 1px solid #59429d;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+  display: block;
+  padding-top: 7px;
+  padding-bottom: 7px;
+
+}
+
+.petshop-form button {
+  font-size: 1.2em;
+  background: #59429d;
+  border: 0;
+  margin-bottom: 5em;
+  color: #ffffff;
+  padding: 0.3em 1.5em;
+  box-shadow: 2px 2px 2px rgba(0,0,0,0.2);
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+  position: absolute;
+  top: 30%;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+.petshop-form button:hover {
+  background-color: #8763a3;
+}
+
+/* /* Estilos para o MelhorPetshopDisplay */
+
+.MelhorPetshopDisplay {
+  max-width: 300px; /* Defina o tamanho máximo */
+  margin: 20px auto; /* Define margens automáticas para centralizar verticalmente e horizontalmente */
+  margin-top: 0%;
+  padding: 0px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.MelhorPetshopDisplay h2 {
+  font-family: sans-serif; /* Altere a fonte conforme desejado */
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #380B61;
+}
+
+.MelhorPetshopDisplay p {
+  margin-bottom: 10px;
+  font-family: sans-serif;
+  color: #380B61;
+}
+
+.MelhorPetshopDisplay .petshop-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.MelhorPetshopDisplay .petshop-info p {
+  margin: 0;
+}
+
+

@@ -4,10 +4,7 @@ import com.example.testeDTI.request.MelhorPetshopRequest;
 import com.example.testeDTI.response.MelhorPetshopResponse;
 import com.example.testeDTI.service.PetshopService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/petshop")
@@ -19,9 +16,11 @@ public class PetshopController{
         this.petshopService = petshopService;
     }
 
-    @PostMapping("/melhor-petshop")
-    public MelhorPetshopResponse encontrarMelhorPetshop(@RequestBody MelhorPetshopRequest request) {
-        return petshopService.encontrarMelhorPetshop(request);
+    @GetMapping("/melhor-petshop")
+    public MelhorPetshopResponse encontrarMelhorPetshop(@RequestParam("data") String data,
+                                                        @RequestParam("quantidadePequenos") int quantidadePequenos,
+                                                        @RequestParam("quantidadeGrandes") int quantidadeGrandes) {
+        return petshopService.encontrarMelhorPetshop(new MelhorPetshopRequest(data, quantidadePequenos, quantidadeGrandes));
     }
 
 }
