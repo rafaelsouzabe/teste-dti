@@ -12,21 +12,5 @@ import lombok.Setter;
 public class MelhorPetshopResponse {
 
     private String nome;
-    private double precoTotal;
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public double getPrecoTotal() {
-        return precoTotal;
-    }
-
-    public void setPrecoTotal(double precoTotal) {
-        this.precoTotal = precoTotal;
-    }
+    private Double precoTotal;
 }

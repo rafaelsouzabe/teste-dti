@@ -20,7 +20,11 @@ public class PetshopController{
     public MelhorPetshopResponse encontrarMelhorPetshop(@RequestParam("data") String data,
                                                         @RequestParam("quantidadePequenos") int quantidadePequenos,
                                                         @RequestParam("quantidadeGrandes") int quantidadeGrandes) {
-        return petshopService.encontrarMelhorPetshop(new MelhorPetshopRequest(data, quantidadePequenos, quantidadeGrandes));
+        try {
+            return petshopService.encontrarMelhorPetshop(new MelhorPetshopRequest(data, quantidadePequenos, quantidadeGrandes));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

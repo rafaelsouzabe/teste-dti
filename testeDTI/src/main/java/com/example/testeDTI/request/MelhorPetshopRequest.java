@@ -12,19 +12,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MelhorPetshopRequest {
     private String data;
-    private int quantidadePequenos;
-    private int quantidadeGrandes;
+    private Integer quantidadePequenos;
+    private Integer quantidadeGrandes;
 
 
-    public String getData() {
-        return data;
-    }
-
-    public int getQuantidadePequenos() {
-        return quantidadePequenos;
-    }
-
-    public int getQuantidadeGrandes() {
-        return quantidadeGrandes;
-    }
 }

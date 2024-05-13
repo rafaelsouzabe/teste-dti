@@ -9,7 +9,7 @@ public class CalculadoraFimDeSemana implements CalculadoraPreco{
     public double calcularPrecoTotal(Petshop petshop, int quantidadePequenos, int quantidadeGrandes) {
         double precoPequenos = 0;
         double precoGrandes = 0;
-        if (petshop.isPorcentagem()) {
+        if (petshop.getPorcentagem()) {
             precoPequenos = petshop.getValorCaoPequeno() + (petshop.getValorCaoPequeno() * (petshop.getAumentoCaoPequeno() / 100));
             precoGrandes = petshop.getValorCaoGrande() + (petshop.getValorCaoGrande() * (petshop.getAumentoCaoGrande() / 100));
         }else {
