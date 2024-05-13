@@ -16,6 +16,9 @@ public class CalculadoraFimDeSemana implements CalculadoraPreco{
             precoPequenos = petshop.getValorCaoPequeno() + petshop.getAumentoCaoPequeno();
             precoGrandes = petshop.getValorCaoGrande() + petshop.getAumentoCaoGrande();
         }
-        return quantidadePequenos * precoPequenos + quantidadeGrandes * precoGrandes;
+        double precoTotalPequenos = quantidadePequenos * precoPequenos;
+        double precoTotalGrandes = quantidadeGrandes * precoGrandes;
+
+        return precoTotalPequenos + precoTotalGrandes;
     }
 }

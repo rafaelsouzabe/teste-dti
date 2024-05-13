@@ -1,4 +1,4 @@
-package com.example.testeDTI;
+package com.example.testeDTI.repository;
 
 import com.example.testeDTI.core.entity.Petshop;
 import lombok.Getter;
@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@org.springframework.stereotype.Repository
 public class Repository {
 
     private List<Petshop> petshops;

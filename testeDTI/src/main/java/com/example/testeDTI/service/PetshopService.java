@@ -1,5 +1,5 @@
 package com.example.testeDTI.service;
-import com.example.testeDTI.Repository;
+import com.example.testeDTI.repository.Repository;
 import com.example.testeDTI.core.calculadora.CalculadoraFimDeSemana;
 import com.example.testeDTI.core.calculadora.CalculadoraPreco;
 import com.example.testeDTI.core.calculadora.CalculadoraSemana;
@@ -17,20 +17,17 @@ import java.util.List;
 public class PetshopService {
     private final CalculadoraPreco calculadoraPrecoSemana;
     private final CalculadoraPreco calculadoraPrecoFimDeSemana;
-    private Repository repository;
+    private final Repository repository;
 
     @Autowired
     public PetshopService(CalculadoraSemana calculadoraPrecoSemana,
-                          CalculadoraFimDeSemana calculadoraPrecoFimDeSemana
-                         ) {
+                          CalculadoraFimDeSemana calculadoraPrecoFimDeSemana, Repository repository) {
         this.calculadoraPrecoSemana = calculadoraPrecoSemana;
         this.calculadoraPrecoFimDeSemana = calculadoraPrecoFimDeSemana;
-        repository = new Repository();
+        this.repository = repository;
     }
 
     public MelhorPetshopResponse encontrarMelhorPetshop(MelhorPetshopRequest request) throws Exception {
-
-        repository.getPetshops();
 
         LocalDate data = LocalDate.parse(request.getData());
         double melhorPreco = Double.MAX_VALUE;
@@ -40,7 +37,7 @@ public class PetshopService {
         if (petsShop.isEmpty()) {
             throw new Exception("NÃO EXISTEM PETS SHOP DISPONIVEIS");
         }
-        Petshop melhorPetshop = petsShop.get(0);
+        Petshop melhorPetshop = null;
 
         for (Petshop petshop : petsShop) {
             double precoTotal;
@@ -53,12 +50,11 @@ public class PetshopService {
                         request.getQuantidadePequenos(),
                         request.getQuantidadeGrandes());
             }
-            if (precoTotal < melhorPreco || (precoTotal == melhorPreco && petshop.getDistancia()< melhorPetshop.getDistancia())) {
+            if (precoTotal < melhorPreco || (precoTotal == melhorPreco && verificaMenorDistancia(petshop, melhorPetshop))) {
                 melhorPreco = precoTotal;
                 melhorPetshop = petshop;
             }
         }
-
         if (melhorPetshop == null) {
             throw new Exception("NÃO EXISTEM PETS SHOP DISPONIVEIS");
         }
@@ -72,5 +68,7 @@ public class PetshopService {
     private boolean isFinalDeSemana(LocalDate data) {
         return data.getDayOfWeek() == DayOfWeek.SATURDAY || data.getDayOfWeek() == DayOfWeek.SUNDAY;
     }
-
+    private boolean verificaMenorDistancia(Petshop petshop, Petshop melhorPetshop){
+        return  petshop.getDistancia()< melhorPetshop.getDistancia();
+    }
 }
