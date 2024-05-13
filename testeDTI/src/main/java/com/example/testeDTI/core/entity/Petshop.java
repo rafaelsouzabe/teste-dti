@@ -12,7 +12,6 @@ public class Petshop {
 
     private Integer id;
     private String nome;
-    @NonNull
     private Double distancia;
     private Double valorCaoPequeno;
     private Double valorCaoGrande;

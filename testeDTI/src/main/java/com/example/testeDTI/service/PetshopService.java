@@ -17,6 +17,7 @@ import java.util.List;
 public class PetshopService {
     private final CalculadoraPreco calculadoraPrecoSemana;
     private final CalculadoraPreco calculadoraPrecoFimDeSemana;
+    private Repository repository;
 
     @Autowired
     public PetshopService(CalculadoraSemana calculadoraPrecoSemana,
@@ -24,14 +25,13 @@ public class PetshopService {
                          ) {
         this.calculadoraPrecoSemana = calculadoraPrecoSemana;
         this.calculadoraPrecoFimDeSemana = calculadoraPrecoFimDeSemana;
+        repository = new Repository();
     }
 
     public MelhorPetshopResponse encontrarMelhorPetshop(MelhorPetshopRequest request) throws Exception {
-        Repository repository = new Repository();
+
         repository.getPetshops();
 
-
-        //aqui vai ser a chamada do repository que vai retornar a lista de petshops
         LocalDate data = LocalDate.parse(request.getData());
         double melhorPreco = Double.MAX_VALUE;
 
@@ -40,9 +40,7 @@ public class PetshopService {
         if (petsShop.isEmpty()) {
             throw new Exception("NÃO EXISTEM PETS SHOP DISPONIVEIS");
         }
-
         Petshop melhorPetshop = petsShop.get(0);
-
 
         for (Petshop petshop : petsShop) {
             double precoTotal;
