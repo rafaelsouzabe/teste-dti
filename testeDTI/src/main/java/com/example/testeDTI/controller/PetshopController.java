@@ -4,11 +4,14 @@ import com.example.testeDTI.request.MelhorPetshopRequest;
 import com.example.testeDTI.response.MelhorPetshopResponse;
 import com.example.testeDTI.service.PetshopService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/petshop")
-public class PetshopController{
+public class PetshopController {
     private final PetshopService petshopService;
 
     @Autowired

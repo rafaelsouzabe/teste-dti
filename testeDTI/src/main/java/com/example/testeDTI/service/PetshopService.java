@@ -1,4 +1,5 @@
 package com.example.testeDTI.service;
+
 import com.example.testeDTI.repository.Repository;
 import com.example.testeDTI.core.calculadora.CalculadoraFimDeSemana;
 import com.example.testeDTI.core.calculadora.CalculadoraPreco;
@@ -15,32 +16,29 @@ import java.util.List;
 
 @Service
 public class PetshopService {
-    private final CalculadoraPreco calculadoraPrecoSemana;
-    private final CalculadoraPreco calculadoraPrecoFimDeSemana;
+    private final CalculadoraPreco calculadoraPrecoSemana = new CalculadoraSemana();
+    private final CalculadoraPreco calculadoraPrecoFimDeSemana = new CalculadoraFimDeSemana();
     private final Repository repository;
 
     @Autowired
-    public PetshopService(CalculadoraSemana calculadoraPrecoSemana,
-                          CalculadoraFimDeSemana calculadoraPrecoFimDeSemana, Repository repository) {
-        this.calculadoraPrecoSemana = calculadoraPrecoSemana;
-        this.calculadoraPrecoFimDeSemana = calculadoraPrecoFimDeSemana;
+    public PetshopService(Repository repository) {
         this.repository = repository;
     }
 
     public MelhorPetshopResponse encontrarMelhorPetshop(MelhorPetshopRequest request) throws Exception {
 
         LocalDate data = LocalDate.parse(request.getData());
-        double melhorPreco = Double.MAX_VALUE;
+        Double melhorPreco = null;
+        Petshop melhorPetshop = null;
 
         final List<Petshop> petsShop = repository.getPetshops();
 
         if (petsShop.isEmpty()) {
             throw new Exception("NÃO EXISTEM PETS SHOP DISPONIVEIS");
         }
-        Petshop melhorPetshop = null;
 
         for (Petshop petshop : petsShop) {
-            double precoTotal;
+            Double precoTotal;
             if (isFinalDeSemana(data)) {
                 precoTotal = calculadoraPrecoFimDeSemana.calcularPrecoTotal(petshop,
                         request.getQuantidadePequenos(),
@@ -50,13 +48,10 @@ public class PetshopService {
                         request.getQuantidadePequenos(),
                         request.getQuantidadeGrandes());
             }
-            if (precoTotal < melhorPreco || (precoTotal == melhorPreco && verificaMenorDistancia(petshop, melhorPetshop))) {
+            if (melhorPetshop == null || precoTotal < melhorPreco || (precoTotal == melhorPreco && verificaMenorDistancia(petshop, melhorPetshop))) {
                 melhorPreco = precoTotal;
                 melhorPetshop = petshop;
             }
-        }
-        if (melhorPetshop == null) {
-            throw new Exception("NÃO EXISTEM PETS SHOP DISPONIVEIS");
         }
 
         MelhorPetshopResponse response = new MelhorPetshopResponse();
@@ -65,10 +60,11 @@ public class PetshopService {
         return response;
     }
 
-    private boolean isFinalDeSemana(LocalDate data) {
+    private Boolean isFinalDeSemana(LocalDate data) {
         return data.getDayOfWeek() == DayOfWeek.SATURDAY || data.getDayOfWeek() == DayOfWeek.SUNDAY;
     }
-    private boolean verificaMenorDistancia(Petshop petshop, Petshop melhorPetshop){
-        return  petshop.getDistancia()< melhorPetshop.getDistancia();
+
+    private Boolean verificaMenorDistancia(Petshop petshop, Petshop melhorPetshop) {
+        return petshop.getDistancia() < melhorPetshop.getDistancia();
     }
 }

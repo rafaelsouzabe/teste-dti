@@ -10,7 +10,7 @@ import java.util.List;
 @org.springframework.stereotype.Repository
 public class Repository {
 
-    private List<Petshop> petshops;
+    private final List<Petshop> petshops;
 
     public Repository() {
         petshops = new ArrayList<>();
